@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Main from './components/MainComponent'
 import dishes from './shared/dishes.js';
+import {BrowserRouter} from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -12,9 +13,11 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <Main/>
-      </div>
+      <BrowserRouter>
+        <div>
+          <Main/>
+        </div>
+      </BrowserRouter>
     );
   }
 }
