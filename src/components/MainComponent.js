@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import Menu from './MenuComponent.js';
+import DishDetail from './DishdetailComponent.js';
 import Contact from './ContactUsComponent.js';
 import {DISHES} from '../shared/dishes.js';
 import {LEADERS} from '../shared/leaders.js';
@@ -39,12 +40,22 @@ class Main extends Component {
       )
     }
 
+    const selectedDish = ({match}) => {
+      return (
+        <DishDetail 
+          dish={this.state.dishes.filter(dish=>dish.id === parseInt(match.params.dishId, 10))[0]}
+          comments={this.state.comments.filter(comment=>comment.dishId === parseInt(match.params.dishId, 10))}
+        />
+      )
+    }
+
     return (
       <div>
         <Header/>
              <Switch>
                 <Route path="/home" component={HomePage}/>
-                <Route exact path="/menu" component={()=><Menu dishes={this.state.dishes}/>} /> 
+                <Route exact path="/menu" component={()=><Menu dishes={this.state.dishes}/>} />
+                <Route path="/menu/:dishId" component={selectedDish}/> 
                 <Route path="/contactus" component={Contact}/>
                 <Redirect to = '/home'/>
              </Switch> 
