@@ -13,7 +13,6 @@ const RenderMenuItem = (props) => {
             </Card>
         </Link>
     )
-
 }
 
 const Menu = (props) =>{
