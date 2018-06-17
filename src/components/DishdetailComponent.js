@@ -21,10 +21,10 @@ function RenderComments({comments}) {
          return comments.map(comment => {
             return (
                 <li>
-                <div key={comment.id} className="m-1 pb-1">
-                    <div>{comment.comment}</div>
-                    <div>-- {comment.author}, {moment(comment.date).format('MMM DD, YYYY')}</div>
-                </div>
+                    <div key={comment.id} className="m-1 pb-1">
+                        <div>{comment.comment}</div>
+                        <div>-- {comment.author}, {moment(comment.date).format('MMM DD, YYYY')}</div>
+                    </div>
                 </li>)
         })
     }else{
