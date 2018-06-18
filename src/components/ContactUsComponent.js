@@ -200,7 +200,7 @@ class Contact extends Component {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label md={2} for="message">Message</Label>
+                            <Label md={2} htmlFor="message">Message</Label>
                             <Col md={10}>
                                 <Input type="textarea" rows="12" id="message" name="message" value={this.state.message} onChange={this.handleInputChange}/>
                             </Col>

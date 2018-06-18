@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, NavbarBrand, Nav, NavItem, Collapse, NavbarToggler, Jumbotron} from 'reactstrap';
+import {Navbar, NavbarBrand, Nav, NavItem, Collapse, NavbarToggler, Jumbotron, Button, Modal, ModalBody, ModalHeader, Label, Form, FormGroup, Input, Col} from 'reactstrap';
 import {NavLink} from 'react-router-dom';
 
 class Header extends Component {
@@ -7,19 +7,28 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isNavOpen:false
+            isNavOpen:false,
+            isModalOpen:false,
         }
     }
 
     toggleNav = () => {
-        console.log('dddd', this.state.isNavOpen)
         this.setState({isNavOpen: !this.state.isNavOpen})
+    }
+
+    toggleModal=() => {
+        this.setState({isModalOpen: !this.state.isModalOpen})
+    }
+
+    handleLogin =(event) => {
+        alert(this.username.value + this.password.value + this.remember.checked);
+        event.preventDefault();
     }
 
     render() {
         return(
             <React.Fragment>
-            <Navbar dark expand="md" color="primary">
+            <Navbar dark expand="md" >
                 <div className="container">
                     <NavbarToggler onClick={this.toggleNav}/>
                     <NavbarBrand className = "mr-auto" href="/">
@@ -48,12 +57,46 @@ class Header extends Component {
                             </NavLink>
                         </NavItem>
                     </Nav>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            <Button outline color="primary" onClick={this.toggleModal}>
+                                <span className="fa fa-sign-in fa-lg"></span>
+                                <span> Login</span>
+                            </Button>
+                        </NavItem>
+                    </Nav>
                     </Collapse>
                 </div>
             </Navbar>
             <Jumbotron>
-                <div className="container">
+                <div className="container" >
                     <div className="row row-header">
+                        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                            <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+                            <ModalBody>
+                                <Form onSubmit={this.handleLogin}>
+                                    <FormGroup row>
+                                        <Label md={2} htmlFor="username">Username</Label>
+                                        <Col md={10}>
+                                            <Input type="text" name="username" id="username" innerRef={(input)=>this.username = input}/>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label md={2} htmlFor="password">Password</Label>
+                                        <Col  md={10}>
+                                            <Input type="password" name="password" id="password" innerRef={input=>this.password = input}/>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup check>
+                                        <Label check>
+                                            <Input type="checkbox" name="remember" innerRef={input=>this.remember=input}/> Remember me
+                                        </Label>
+                                    </FormGroup>
+                                    <br/>
+                                    <Button className="p-2" type="submit" value="submit"  block color="success">Login</Button>
+                                </Form>
+                            </ModalBody>
+                        </Modal>
                         <div className="col-12 col-sm-6">
                             <h1>Ristorante con Fusion</h1>
                             <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
