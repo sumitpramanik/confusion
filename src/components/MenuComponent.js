@@ -22,16 +22,16 @@ const Menu = (props) =>{
                 <RenderMenuItem dish={dish}/>
             </div>
         );
-    });                 
+    });
 
     return (
         <div className="container">
-        <div class="row mt-3">
+        <div className="row mt-3">
         <Breadcrumb>
             <BreadcrumbItem ><Link to="/home">Home</Link></BreadcrumbItem>
             <BreadcrumbItem active>Menu</BreadcrumbItem>
         </Breadcrumb>
-        <div class="col-12">
+        <div className="col-12">
             <h3>Menu</h3>
             <hr/>
         </div>
@@ -41,6 +41,6 @@ const Menu = (props) =>{
             </div>
         </div>
     );
-} 
+}
 
 export default Menu;
