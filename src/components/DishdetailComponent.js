@@ -32,7 +32,7 @@ function RenderDish({ dish }) {
 
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, dishId }) {
     if (comments != null) {
         const comment = comments.map((c) => {
             return (
@@ -52,7 +52,10 @@ function RenderComments({ comments }) {
                 </div>
                 <div className="row">
                     {comment}
-                    <CommentForm />
+                    <CommentForm
+                        addComment={addComment}
+                        dishId={dishId}
+                    />
                 </div>
             </div>
         );
@@ -76,8 +79,9 @@ class CommentForm extends Component {
     }
 
     handleSubmit(values) {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
+        //console.log("Current State is: " + JSON.stringify(values));
+        //alert("Current State is: " + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.comment, values.author);
     }
 
     toggleModal() {
@@ -108,10 +112,10 @@ class CommentForm extends Component {
                                 </Control.select>
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="YourName" md={3}>Your Name</Label>
+                                <Label htmlFor="author" md={3}>Your Name</Label>
                             </Row>
                             <Row className="form-group">
-                                <Control.text model=".yourname" id="yourname" name="yourname"
+                                <Control.text model=".author" id="author" name="author"
                                               placeholder="Your Name"
                                               className="form-control"
                                               validators={
@@ -123,7 +127,7 @@ class CommentForm extends Component {
                                 />
                                 <Errors
                                     className="text-danger"
-                                    model=".yourname"
+                                    model=".author"
                                     show="touched"
                                     messages={{
                                         required: 'Required : ',
@@ -172,7 +176,11 @@ const DishDetail = (props) => {
                     <RenderDish dish={props.dish} />
                 </div>
                 <div className="col-12 col-md-5 m-1">
-                    <RenderComments comments={props.comments}/>
+                    <RenderComments
+                        comments={props.comments}
+                        addComment={props.addComment}
+                        dishId={props.dish.id}
+                    />
 
                 </div>
             </div>
