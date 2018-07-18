@@ -1,24 +1,25 @@
 import React from 'react';
 import {Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText} from 'reactstrap';
 import {Loading} from './LoadingComponent.js';
+import {baseUrl} from "../shared/baseUrl";
 
 const Home = (props) => {
 
-    const RenderCard = ({item, isLoading, dishesErrMess}) => {
+    const RenderCard = ({item, isLoading, errMess}) => {
             if(isLoading) {
                 return(
                     <Loading/>
                 )
             }
-            else if (dishesErrMess) {
+            else if (errMess) {
                 return (
-                    <h4>{dishesErrMess}</h4>
+                    <h4>{errMess}</h4>
                 )
             }
             else {
                 return (
                     <Card>
-                        <CardImg src={ item.image }/>
+                        <CardImg src={ baseUrl + item.image }/>
                         <CardBody>
                             <CardTitle>{ item.name }</CardTitle>
                             { item.designation ? <CardSubtitle>{ item.designation }</CardSubtitle> : null }
@@ -34,10 +35,10 @@ const Home = (props) => {
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.dish} isLoading={props.dishesLoading} dishesErrMess={props.dishesErrMess}/>
+                    <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess}/>
                 </div>
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.promotion}/>
+                    <RenderCard item={props.promotion} isLoading={props.promosLoading} errMess={props.promosErrMess}/>
                 </div>
                 <div className="col-12 col-md m-1">
                     <RenderCard item={props.leader}/>
