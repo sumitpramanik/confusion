@@ -2,22 +2,19 @@ import * as ActionTypes from './ActionTypes';
 
 
 export const Comments = (state = {
-        isLoading:false,
+        isLoading:true,
         errmess:null,
         comments:[]
     },  action) => {
     switch(action.type) {
         case ActionTypes.ADD_COMMENT : {
-             const comment = action.payload;
-             comment.id = state.length;
-             comment.date = new Date().toISOString();
-             return state.concat(comment)
+             return {...state, errmess:null,comments:state.comments.concat(action.payload)}
         }
         case ActionTypes.ADD_COMMENTS : {
-            return {...state, comments: action.payload}
+            return {...state, errmess: null,comments: action.payload}
         }
         case ActionTypes.COMMENTS_FAILED : {
-            return {...state, errmess:action.payload, comments:[]}
+            return {...state, isLoading:false, errmess:action.payload}
         }
         default : {
             return state;

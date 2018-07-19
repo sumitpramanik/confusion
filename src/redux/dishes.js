@@ -13,7 +13,7 @@ export const Dishes = (state = {
             return {...state, isLoading:false, errmess:null, dishes:action.payload}
         }
         case ActionTypes.DISHES_FAILED: {
-            return {...state, isLoading:true, errmess:action.payload, dishes:[]}
+            return {...state, isLoading:false, errmess:action.payload, dishes:[]}
         }
         default : {
             return state;

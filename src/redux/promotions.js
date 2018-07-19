@@ -14,7 +14,8 @@ export const Promotions = (state = {
             return {...state, isLoading:false, errmess:null,promotions:action.payload}
         }
         case ActionTypes.PROMOS_FAILED:{
-            return {...state, isLoading:true, errmess:action.payload, promotions:[]}
+            console.log('action.payload', action.payload);
+            return {...state, isLoading:false, errmess:action.payload}
         }
         default: {
             return state;
