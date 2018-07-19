@@ -77,8 +77,8 @@ class Main extends Component {
     return (
       <div>
         <Header/>
-          <TransitionGroup key={this.props.location.key} classNames="page" timeout={300}>
-              <CSSTransition>
+          <TransitionGroup>
+              <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
                  <Switch>
                     <Route path="/home" component={HomePage}/>
                     <Route exact path="/menu" component={()=><Menu dishes={this.props.dishes} />} />
