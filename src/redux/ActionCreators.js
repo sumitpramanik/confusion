@@ -40,6 +40,27 @@ export const postComment = (dishId, rating, comment, author) => (dispatch) => {
         .catch(err => console.log('POST COMMENTS :', err.message))
 }
 
+export const postFeedback = (feedback) => (dispatch) => {
+    return fetch(baseUrl + 'feedback', {
+        method:'POST',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(feedback)
+    })
+        .then(response => {
+            if(response.ok) {
+                return response;
+            }else {
+                var err = new Error('Status :' + response.status + ': ' + response.statusText) ;
+                throw err;
+            }
+        }, error => {throw Error(error.message)})
+        .then(response => response.json())
+        .then(response => alert('Thanks for your feedback'+ JSON.stringify(response)))
+        .catch(error => console.log('ERROR POST FEEDBACK :', error.message))
+}
+
 export const fetchDishes = () => (dispatch) => {
     dispatch(dishLoading());
     return fetch(baseUrl + 'dishes')
@@ -81,6 +102,46 @@ export const fetchPromos = () => (dispatch) => {
         .then(promos => dispatch(addPromos(promos)))
         .catch(error => dispatch(promosFailed(error.message)));
 };
+
+export const fetchLeaders = () => (dispatch) => {
+    dispatch(leadersLoading());
+    fetch(baseUrl + 'leaders')
+        .then(response => {
+            if(response.ok) {
+                return response;
+            } else {
+                var error = new Error('Status : '+ response.status + ': ' + response.statusText);
+                throw error;
+            }
+        },
+        error => {
+            var err = new Error(error.message);
+            throw err;
+        })
+        .then(response => response.json())
+        .then(leaders => dispatch(addLeaders(leaders)))
+        .catch(error => dispatch(leadersFailed(error.message)))
+};
+
+export const leadersLoading = () => {
+    return {
+        type:ActionTypes.LEADERS_LOADING
+    }
+}
+
+const addLeaders = (leaders) => {
+    return {
+        type:ActionTypes.ADD_LEADERS,
+        payload:leaders
+    }
+};
+
+const leadersFailed = (errmess) => {
+    return {
+        type:ActionTypes.LEADERS_FAILED,
+        payload:errmess
+    }
+}
 
 export const dishLoading = () => {
     return {
