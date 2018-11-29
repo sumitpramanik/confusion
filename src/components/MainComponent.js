@@ -82,18 +82,18 @@ class Main extends Component {
     return (
       <div>
         <Header/>
-          <TransitionGroup>
-              <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
-                 <Switch>
-                    <Route path="/home" component={HomePage}/>
-                    <Route exact path="/menu" component={()=><Menu dishes={this.props.dishes} />} />
-                    <Route path="/menu/:dishId" component={selectedDish}/>
-                    <Route path="/contactus" component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback}/>}/>
-                    <Route path = "/aboutus" component={() => <About leaders = {this.props.leaders}/>}/>
-                    <Redirect to = '/home'/>
-                 </Switch>
-              </CSSTransition>
-          </TransitionGroup>
+        <TransitionGroup>
+          <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+             <Switch>
+                <Route path="/home" component={HomePage}/>
+                <Route exact path="/menu" component={()=><Menu dishes={this.props.dishes} />} />
+                <Route path="/menu/:dishId" component={selectedDish}/>
+                <Route path="/contactus" component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback}/>}/>
+                <Route path = "/aboutus" component={() => <About leaders = {this.props.leaders}/>}/>
+                <Redirect to = "/home"/>
+             </Switch>
+          </CSSTransition>
+        </TransitionGroup>
         <Footer/>
       </div>
     );
